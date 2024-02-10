@@ -24,6 +24,21 @@ api.interceptors.response.use(
       UserService.removeToken();
       window.location.href = "/login";
     }
+    if (error.response?.status === 500) {
+      // Todo: handle 500
+    }
+    if (error.response?.status === 502) {
+      // Todo: handle 502
+    }
+    if (error.response?.status === 503) {
+      // Todo: handle 503
+    }
+    if (error.response?.status === 504) {
+      // Todo: handle 504
+    }
+    if (error.response?.status === 429) {
+      // Todo: handle 429
+    }
     return Promise.reject(error);
   }
 );
