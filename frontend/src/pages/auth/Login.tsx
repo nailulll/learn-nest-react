@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import authService from "@/services/auth-service";
 import { AxiosError } from "axios";
 import { useMutation } from "react-query";
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import loginSchema from "@/lib/validations/login-validation";
@@ -26,8 +26,10 @@ import {
 } from "@/components/ui/form";
 import { useState } from "react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { toast } from "sonner";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof loginSchema>>({
@@ -40,7 +42,12 @@ const Login = () => {
 
   const mutation = useMutation(authService.login, {
     onSuccess: () => {
-      redirect("/dashboard");
+      form.reset();
+      setError(null);
+      toast("Success login to your account", {
+        duration: 2000,
+      });
+      navigate("/dashboard");
     },
     onError: (error) => {
       if (error instanceof AxiosError) {

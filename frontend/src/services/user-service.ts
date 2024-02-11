@@ -1,6 +1,5 @@
 import { Token } from "@/types";
 
-const getUser = () => {};
 const getAccessToken = () => localStorage.getItem("access_token");
 const getRefreshToken = () => localStorage.getItem("refresh_token");
 const setToken = (token: Token) => {
@@ -13,7 +12,6 @@ const removeToken = () => {
 };
 
 export default {
-  getUser,
   getAccessToken,
   getRefreshToken,
   setToken,

@@ -23,4 +23,34 @@ const login = async ({
   }
 };
 
-export default { login };
+const register = async ({
+  username,
+  password,
+}: {
+  username: string;
+  password: string;
+}) => {
+  try {
+    await api.post("/auth/register", {
+      username,
+      password,
+    });
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw error;
+    }
+  }
+};
+
+const logout = async () => {
+  try {
+    await api.post("/auth/logout");
+    userService.removeToken();
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw error;
+    }
+  }
+};
+
+export default { login, register, logout };
