@@ -1,4 +1,4 @@
-import { UserService } from "@/services/user.service";
+import userService from "@/services/user-service";
 import axios, { AxiosError } from "axios";
 
 const api = axios.create({
@@ -11,7 +11,8 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-  config.headers.Authorization = `Bearer ${UserService.getAccessToken()}`;
+  const token = userService.getAccessToken();
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
@@ -21,7 +22,7 @@ api.interceptors.response.use(
   },
   (error: AxiosError) => {
     if (error.response?.status === 401) {
-      UserService.removeToken();
+      userService.removeToken();
       window.location.href = "/login";
     }
     if (error.response?.status === 500) {
@@ -40,7 +41,7 @@ api.interceptors.response.use(
       // Todo: handle 429
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export default api;

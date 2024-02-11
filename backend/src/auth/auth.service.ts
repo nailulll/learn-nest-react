@@ -24,13 +24,13 @@ export class AuthService {
     });
 
     if (!user) {
-      throw new HttpException("User with this username does not exist", 400);
+      throw new HttpException("Wrong credentials", 400);
     }
 
     const isValid = await bcrypt.compare(dto.password, user.password);
 
     if (!isValid) {
-      throw new HttpException("Wrong password", 400);
+      throw new HttpException("Wrong credentials", 400);
     }
 
     const tokens = await this.getTokens(user.id);
