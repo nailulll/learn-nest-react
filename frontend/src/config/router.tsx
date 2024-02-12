@@ -18,6 +18,10 @@ export default createBrowserRouter([
         path: "register",
         element: <Register />,
       },
+      {
+        path: "/",
+        element: <Login />,
+      }
     ],
   },
   {

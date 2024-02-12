@@ -1,5 +1,7 @@
+import authService from "@/services/auth-service";
 import userService from "@/services/user-service";
 import axios, { AxiosError } from "axios";
+import { toast } from "sonner";
 
 const api = axios.create({
   baseURL: "http://localhost:3000/",
@@ -22,23 +24,23 @@ api.interceptors.response.use(
   },
   (error: AxiosError) => {
     if (error.response?.status === 401) {
-      userService.removeToken();
-      window.location.href = "/login";
+      authService.refresh();
+      api.interceptors.request.use(error.request);
     }
     if (error.response?.status === 500) {
-      // Todo: handle 500
+      toast("Server error, please try again later");
     }
     if (error.response?.status === 502) {
-      // Todo: handle 502
+      toast("Bad gateway, please try again later");
     }
     if (error.response?.status === 503) {
-      // Todo: handle 503
+      toast("Service unavailable, please try again later");
     }
     if (error.response?.status === 504) {
-      // Todo: handle 504
+      toast("Gateway timeout, please try again later");
     }
     if (error.response?.status === 429) {
-      // Todo: handle 429
+      toast("Too many requests, please try again later");
     }
     return Promise.reject(error);
   },

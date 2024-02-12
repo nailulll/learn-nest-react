@@ -53,4 +53,20 @@ const logout = async () => {
   }
 };
 
-export default { login, register, logout };
+const refresh = async () => {
+  try {
+    const res = await api.post<Token>("/auth/refresh", {
+      token: userService.getRefreshToken(),
+    });
+    userService.setToken(res.data);
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      if(error.response?.status === 401) {
+        userService.removeToken();
+      }
+      throw error;
+    }
+  }
+}
+
+export default { login, register, logout, refresh };
