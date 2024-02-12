@@ -24,8 +24,9 @@ api.interceptors.response.use(
   },
   (error: AxiosError) => {
     if (error.response?.status === 401) {
-      authService.refresh();
-      api.interceptors.request.use(error.request);
+      authService.refresh().then(() => {
+        api.interceptors.request.use(error.request);
+      });
     }
     if (error.response?.status === 500) {
       toast("Server error, please try again later");
