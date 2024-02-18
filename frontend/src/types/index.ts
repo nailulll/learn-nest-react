@@ -7,3 +7,7 @@ export type HttpException = {
   message: string;
   statusCode: number;
 };
+
+export type User = {
+  username: string;
+};

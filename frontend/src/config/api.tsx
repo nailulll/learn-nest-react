@@ -44,7 +44,7 @@ api.interceptors.response.use(
       toast("Too many requests, please try again later");
     }
     return Promise.reject(error);
-  },
+  }
 );
 
 export default api;

@@ -61,12 +61,13 @@ const refresh = async () => {
     userService.setToken(res.data);
   } catch (error) {
     if (error instanceof AxiosError) {
-      if(error.response?.status === 401) {
+      if (error.response?.status === 401) {
         userService.removeToken();
+        window.location.reload();
       }
       throw error;
     }
   }
-}
+};
 
 export default { login, register, logout, refresh };
