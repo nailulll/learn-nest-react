@@ -7,6 +7,7 @@ import {
   UsersRound,
 } from "lucide-react";
 import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
 
 const items = [
   {
@@ -37,6 +38,7 @@ const items = [
 ];
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   return (
     <div className="p-10">
       <Button
@@ -58,6 +60,7 @@ const Sidebar = () => {
           className="font-semibold flex gap-5 items-center w-full justify-start my-2"
           variant="ghost"
           size="sm"
+          onClick={() => navigate(item.href)}
         >
           {item.icon}
           {item.name}

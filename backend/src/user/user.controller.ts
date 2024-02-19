@@ -16,4 +16,10 @@ export class UserController {
     delete user.refreshToken;
     return user;
   }
+
+  @Get("")
+  @HttpCode(200)
+  async list(@GetUserId() userId: number) {
+    return this.userService.getAll(userId);
+  }
 }

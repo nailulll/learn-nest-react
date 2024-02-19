@@ -24,10 +24,22 @@ const getMe = async () => {
   }
 };
 
+const getAll = async () => {
+  try {
+    const res = await api.get<User[]>("/users");
+    return res.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw error;
+    }
+  }
+};
+
 export default {
   getAccessToken,
   getRefreshToken,
   setToken,
   removeToken,
   getMe,
+  getAll,
 };
