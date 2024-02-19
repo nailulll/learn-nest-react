@@ -19,6 +19,7 @@ export class UserService {
     return this.userRepository.find({
       select: ["id", "username"],
       where: { id: Not(id) },
+      order: { id: "DESC" },
     });
   }
 }
