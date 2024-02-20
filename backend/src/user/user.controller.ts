@@ -1,7 +1,7 @@
 import { Controller, Get, HttpCode, UseGuards } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { GetUserId } from "./decorators/user-id.decorator";
-import { AuthGuard } from "src/auth/auth.guard";
+import { AuthGuard } from "src/auth/guards/auth.guard";
 
 @UseGuards(AuthGuard)
 @Controller("users")
