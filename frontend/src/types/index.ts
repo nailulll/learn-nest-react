@@ -12,3 +12,9 @@ export type User = {
   id: number;
   username: string;
 };
+
+export type Messages = {
+  id: number;
+  content: string;
+  user: User;
+};

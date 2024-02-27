@@ -6,7 +6,7 @@ import { AuthGuard } from "src/auth/guards/auth.guard";
 @UseGuards(AuthGuard)
 @Controller("users")
 export class UserController {
-  constructor(protected userService: UserService) {}
+  constructor(private userService: UserService) {}
 
   @Get("me")
   @HttpCode(200)

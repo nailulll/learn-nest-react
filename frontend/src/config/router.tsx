@@ -3,6 +3,7 @@ import Register from "@/pages/auth/Register";
 import AuthLayout from "@/pages/layouts/AuthLayout";
 import MainLayout from "@/pages/layouts/MainLayout";
 import Dashboard from "@/pages/main/Dashboard";
+import Chat from "@/pages/messages/Chat";
 import Messages from "@/pages/messages/Messages";
 import Stories from "@/pages/stories/Stories";
 import Streaming from "@/pages/streaming/Streaming";
@@ -51,6 +52,10 @@ export default createBrowserRouter([
       {
         path: "messages",
         element: <Messages />,
+      },
+      {
+        path: "messages/:id",
+        element: <Chat />,
       },
     ],
   },

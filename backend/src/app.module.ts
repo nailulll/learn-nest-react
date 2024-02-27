@@ -4,7 +4,8 @@ import { UserModule } from "./user/user.module";
 import { AuthModule } from "./auth/auth.module";
 import { User } from "./user/user.entity";
 import { ThrottlerModule } from "@nestjs/throttler";
-import { MessagesModule } from './messages/messages.module';
+import { MessagesModule } from "./messages/messages.module";
+import { Messages } from "./messages/messages.entity";
 
 @Module({
   imports: [
@@ -15,7 +16,7 @@ import { MessagesModule } from './messages/messages.module';
       username: "root",
       password: "",
       database: "test",
-      entities: [User],
+      entities: [User, Messages],
       synchronize: true,
     }),
     ThrottlerModule.forRoot([

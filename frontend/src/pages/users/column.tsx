@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { User } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -36,5 +37,16 @@ export const columns: ColumnDef<User>[] = [
         </Button>
       );
     },
+  },
+  {
+    accessorKey: "actions",
+    header: "Actions",
+    cell: ({ row }) => (
+      <Button variant="ghost" size="sm">
+        <Link to={`/messages/${row.original.id}`}>
+          Chat with {row.original.username}
+        </Link>
+      </Button>
+    ),
   },
 ];

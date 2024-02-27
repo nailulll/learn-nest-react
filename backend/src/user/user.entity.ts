@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Messages } from "src/messages/messages.entity";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 
 @Entity("users")
 export class User {
@@ -18,4 +25,10 @@ export class User {
     name: "refresh_token",
   })
   refreshToken: string;
+
+  @OneToMany(() => Messages, (messages) => messages.sender)
+  sentMessages: Messages[];
+
+  @OneToMany(() => Messages, (messages) => messages.receiver)
+  receivedMessages: Messages[];
 }

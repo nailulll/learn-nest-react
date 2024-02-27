@@ -31,11 +31,13 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  pageSize?: number;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  pageSize = 10,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -55,6 +57,11 @@ export function DataTable<TData, TValue>({
       sorting,
       columnFilters,
       columnVisibility,
+    },
+    initialState: {
+      pagination: {
+        pageSize,
+      },
     },
   });
 
